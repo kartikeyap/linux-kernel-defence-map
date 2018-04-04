@@ -44,7 +44,7 @@ digraph {
 
     "Mainline Defences" [shape=oval, color=palegreen3];
     "Out-of-tree Defences" [shape=oval, color=cornflowerblue];
-    "Commercial Defences" [shape=oval, color=lightgrey];
+    "Commercial Defences (grsecurity)" [shape=oval, color=lightgrey];
     "HW Defences" [shape=oval, color=aquamarine];
     "Bug Detection" [shape=octagon, color=mediumpurple];
     "Vulnerabilities" [shape=box, color=pink];
@@ -53,7 +53,7 @@ digraph {
 
   // For pretty legend layout:
   edge [arrowhead=none, style=invis];
-  "Mainline Defences" -> "Out-of-tree Defences" -> "Commercial Defences" -> "HW Defences";
+  "Mainline Defences" -> "Out-of-tree Defences" -> "Commercial Defences (grsecurity)" -> "HW Defences";
   "Bug Detection" -> "Vulnerabilities" -> "Exploitation Techniques";
 
 
@@ -105,6 +105,7 @@ digraph {
     "GRKERNSEC_MODHARDEN";
     "__read_only";
     "GRKERNSEC_DMESG";
+    grsecurity_freelist_hardened [label=""];
 
     // HW Defences
     node [shape=oval, color=aquamarine];
@@ -141,6 +142,7 @@ digraph {
   "__ro_after_init" -> "__read_only";
   "SECURITY_DMESG_RESTRICT" -> "GRKERNSEC_DMESG";
   "STACKLEAK" -> "PAX_MEMORY_STACKLEAK";
+  "SLAB_FREELIST_HARDENED" -> grsecurity_freelist_hardened;
 
 
   // Vulnerabilities and Exploitation Techniques
@@ -243,6 +245,7 @@ digraph {
   "slub-debug" -> "Metadata Corruption";
   "SLAB_FREELIST_RANDOM" -> "Metadata Corruption";
   "SLAB_FREELIST_HARDENED" -> "Metadata Corruption";
+  grsecurity_freelist_hardened -> "Metadata Corruption";
   "PROTECTABLE_MEMORY" -> "Metadata Corruption";
   "STATIC_USERMODEHELPER" -> "Metadata Corruption";
 
